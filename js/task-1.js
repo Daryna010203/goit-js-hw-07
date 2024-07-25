@@ -1,33 +1,50 @@
-// Перед звільненням розробник зламав вихідний код управління акаунтами користувачів нашого сервісу доставки їжі.Виконай рефакторинг методів
-//  об'єкта customer, розставивши відсутні this під час звернення до властивостей об'єкта.
+// З використанням властивостей і методів DOM-елементів, напиши скрипт, який:
 
-const customer = {
-  username: "Mango",
-  balance: 24000,
-  discount: 0.1,
-  orders: ["Burger", "Pizza", "Salad"],
-  // Change code below this line
-  getBalance() {
-    return this.balance;
-  },
-  getDiscount() {
-    return this.discount;
-  },
-  setDiscount(value) {
-    this.discount = value;
-  },
-  getOrders() {
-    return this.orders;
-  },
-  addOrder(cost, order) {
-    this.balance -= cost - cost * this.discount;
-    this.orders.push(order);
-  },
-  // Change code above this line
-};
+// Порахує й виведе в консоль кількість категорій в ul#categories, тобто елементів li.item.
+// Для кожного елемента li.item у списку ul#categories знайде й виведе в консоль текст заголовка елемента(тегу < h2 >) і кількість елементів
+//  у категорії(усіх < li >, вкладених у нього).
 
-customer.setDiscount(0.15);
-console.log(customer.getDiscount()); // 0.15
-customer.addOrder(5000, "Steak");
-console.log(customer.getBalance()); // 19750
-console.log(customer.getOrders()); // ["Burger", "Pizza", "Salad", "Steak"]
+// На що буде звертати увагу ментор при перевірці:
+
+// Кількість категорій, їх назва та кількість елементів отримані за допомогою властивостей і методів DOM-елементів
+// Дані за кожною категорією були отримані й виведені в консоль у тілі циклу або методу forEach()
+// У консолі має бути виведено наступне повідомлення:
+
+const retrieveCategories = document.querySelector("#categories");
+console.log(`Number of Categories: ${retrieveCategories.childElementCount}`);
+const listOfCategories = retrieveCategories.children; 
+
+const retrieveListOfCategories = [...listOfCategories];
+
+retrieveListOfCategories.forEach(element => {
+    console.log(`Category: ${element.firstElementChild.textContent}`);
+    console.log(`Elements: ${element.lastElementChild.childElementCount}`);
+    element.querySelector("h2").classList.add("js-item-title");
+    const addListClasses = element.querySelector("ul");
+    addListClasses.classList.add("js-categories-iteam-list"); 
+    
+    const retrieveListOfItem = addListClasses.querySelectorAll("li");
+    const arreyListOfItem = [...retrieveListOfItem];
+    arreyListOfItem.map(el => el.classList.add("js-iteam-list"));
+ });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
